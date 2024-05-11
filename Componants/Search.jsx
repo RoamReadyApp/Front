@@ -57,7 +57,7 @@ export default function Search({onPress}){
                 style={styles.button}  
                 onPress={onPress}
                 children={() => (
-                    <AntDesign name="search1" size={24} color="black" />
+                    <AntDesign name="search1" size={20} color="black" />
                 )}
             />
            

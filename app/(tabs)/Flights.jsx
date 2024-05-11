@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 import Item from "@/Componants/item";
 import MyButton from "@/Componants/MyButton";
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Search from "@/Componants/Search";
 
@@ -82,7 +82,7 @@ export default function Page() {
     return(
         <ScrollView>
         <View style={styles.container}>
-           <Text>Welcome Flights</Text>
+           <Text style={styles.header}>Welcome Flights</Text>
            <View style={styles.buttonContainer}>
                     {showFilter&&(<Picker
                         selectedValue={month}
@@ -106,9 +106,9 @@ export default function Page() {
                     <MyButton
                         style={styles.button}
                         children={() => (
-                            <AntDesign name="filter" size={24} color="black" />
+                            <Entypo name="calendar" size={17} color="black" />
                         )}
-                        onPress={() => setShowFilter(true)} // Function reference here
+                        onPress={() => setShowFilter(!showFilter)} // Function reference here
                     />
                     
                 </View>
@@ -139,62 +139,53 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column',
+        backgroundColor: '#fff',
     },
     buttonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 1050,
+        marginVertical: 10,
     },
     button: {
-        borderRadius: 5,
-        marginRight: 10,
+        borderRadius: 18,
+        backgroundColor: '#127ac1',
+        padding: 10,
+        marginRight: 'auto', // Move button to the left
     },
     text: {
         fontSize: 20,
         fontStyle: 'italic',
+        color: '#000000',
     },
     header: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 10,
+        margin: 5,
+        color: '#000000',
     },
     list: {
         width: '100%',
-        flexDirection:'column',
-        padding:5,
+        flexDirection: 'column',
+        padding: 5,
+        borderWidth:0,
     },
-    listContaier:{
-        flex :1,
-        width :'100%',
-        borderColor: '#ccc',
-        borderWidth: 1,
-        borderRadius: 5,
+    listContaier: {
+        flex: 1,
+        width: '100%',
         marginBottom: 10,
+        backgroundColor: '#ffffff',
     },
-    items:{
-        flex :1,
-        flexDirection:'row',
-        width:'100%',
-        marginTop :5
+    items: {
+        width: '100%', // Each item takes the full width
+        marginTop: 5,
     },
     picker: {
-        height: 50,
-        width: 50,
-    },
-    searchContainer:{
-        marginLeft:1000,
-        flexDirection:'row',
-        margin:4,
-        padding:2,
-    },
-    input:{
-        width :'55%',
-        height :30,
-        borderWidth:1,
-        borderColor : '#7392b7',
-        borderRadius :6 ,
-        padding :10,
-        margin :8,
-        //borderBlockColor :'#c5d5ea' 
+        height: 40,
+        width: 100,
+        color: '#000000',
+        backgroundColor: '#127ac1',
+        borderRadius:18
     },
 });
+

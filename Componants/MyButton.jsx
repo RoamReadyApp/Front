@@ -1,5 +1,3 @@
-//El Gayar component..........................................
-
 import { Pressable, StyleSheet} from "react-native";
 import React from "react";
 

@@ -1,11 +1,15 @@
 //The list of countries Still working on it don't use it yet
 
 import React , {useEffect , useState} from "react";
-import{ View ,TextInput ,Text , StyleSheet, FlatList , ScrollView} from 'react-native';
+import{ View ,TextInput ,Text , StyleSheet, FlatList , ScrollView , Dimensions} from 'react-native';
 import Countries from "../Componants/Countries";
-import {  useRouter } from "expo-router";
+import {  useRouter  } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Search from "@/Componants/Search";
+
+const windowWidth = Dimensions.get('window').width;
+// Calculate the image width based on a percentage of the window width
+const imageWidth = windowWidth * 0.2;
 
 export default function Country(){
     //the images
@@ -50,17 +54,12 @@ export default function Country(){
             <Countries
                 img={item.img}
                 name ={item.name}
-                onPress={()=> router.push('/listing/' + item.id)}
+                onPress={()=> router.push('/Choose')}
             />
         </View>
     );
 
-    //Routes
-
-    // const handleRoutes =(id) =>(
-    //     router.push('/listing/' + id)
-    // );
-
+    
     
    
     //Search handling//////////////////////////////////////////////////////////////////////
@@ -68,21 +67,7 @@ export default function Country(){
         setDisList(Data);
     },[]);
     
-    useEffect(() => {
-        async function fetchFilteredData() {
-          try {
-            // Retrieve saved search query from AsyncStorage
-            const savedSearchQuery = await AsyncStorage.getItem('query');
-            if (savedSearchQuery) {
-              setQuery(savedSearchQuery);
-            }
-          } catch (error) {
-            console.error('Error retrieving search query from AsyncStorage:', error);
-          }
-        }
-    
-        fetchFilteredData();
-      }, []);
+   
     
 
     useEffect(() => {
@@ -130,57 +115,46 @@ export default function Country(){
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        borderColor: '#ccc',
+        borderWidth: 0,
+        marginBottom: 10,
+        flexWrap: 'wrap', // Allow items to wrap to the next row
+        justifyContent: 'space-between', // Add space between items
+    },
+    imageContainer: {
+        width: imageWidth *1.25, // Adjust width to show 3 items in a row
+        aspectRatio: 1, // Maintain aspect ratio
+        marginBottom: 10, // Adjust spacing between rows
+    },
+    image: {
+        width: '100%', // Adjust width as needed
+        aspectRatio: 1, // Maintain aspect ratio
+        resizeMode: 'cover', // or 'contain' depending on your preference
+        borderRadius: 5,
+    },
+    textContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column',
-    },
-    button: {
-        borderRadius: 5,
-        width: '30%',
-        height: '30%',
+        marginTop: 5, // Adjust spacing between image and text
     },
     text: {
         fontSize: 20,
         fontStyle: 'italic',
+        marginBottom: 5,
     },
-    header: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    list: {
-        width: '100%',
-        flexDirection:'row',
-        marginLeft:5,
-        marginRight:5,
-        padding:5,
-        //alignContent :'center'
-        
-    },
-    listContaier:{
-        flex :1,
-        alignItems :'center',
-    },
-    items:{
-        flex :1,
-        flexDirection:'row',
-        width :'30%',
-    },
-    searchContainer:{
-        marginLeft:1000,
-        flexDirection:'row',
-        margin:4,
-        padding:2,
-    },
-    input:{
-        width :'55%',
-        height :30,
-        borderWidth:1,
-        borderColor : '#7392b7',
-        borderRadius :6 ,
-        padding :10,
-        margin :8,
-        //borderBlockColor :'#c5d5ea' 
+    button: {
+        width: '33.33%',
+        aspectRatio: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        shadowColor: '#000',
+        shadowOffset: { height: 1, width: 1 },
+        shadowOpacity: 0.5,
+        shadowRadius: 1,
+        elevation: 2,
     },
 });

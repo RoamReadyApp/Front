@@ -73,7 +73,7 @@ export default function Page() {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Text>Welcome Hotels</Text>
+                <Text style={styles.header}>Welcome Hotels</Text>
                 <View style={styles.buttonContainer}>
                     {showFilter&&(<Picker
                         selectedValue={type}
@@ -87,9 +87,9 @@ export default function Page() {
                     <MyButton
                         style={styles.button}
                         children={() => (
-                            <AntDesign name="filter" size={24} color="black" />
+                            <AntDesign name="filter" size={17} color="black" />
                         )}
-                        onPress={() => setShowFilter(true)} // Function reference here
+                        onPress={() => setShowFilter(!showFilter)} // Function reference here
                     />
                     
                 </View>
@@ -112,46 +112,52 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'column',
+        backgroundColor: '#fff',
     },
     buttonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 1050,
+        marginVertical: 10,
     },
     button: {
-        borderRadius: 5,
-        marginRight: 10,
+        borderRadius: 18,
+        backgroundColor: '#127ac1',
+        padding: 10,
+        marginRight: 'auto', // Move button to the left
     },
     text: {
         fontSize: 20,
         fontStyle: 'italic',
+        color: '#000000',
     },
     header: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 10,
+        margin: 5,
+        color: '#000000',
     },
     list: {
         width: '100%',
-        flexDirection:'column',
-        padding:5,
+        flexDirection: 'column',
+        padding: 5,
+        borderWidth:0,
     },
-    listContaier:{
-        flex :1,
-        width :'100%',
-        borderColor: '#ccc',
-        borderWidth: 1,
-        borderRadius: 5,
+    listContaier: {
+        flex: 1,
+        width: '100%',
         marginBottom: 10,
+        backgroundColor: '#ffffff',
     },
-    items:{
-        flex :1,
-        flexDirection:'row',
-        width:'100%',
-        marginTop :5
+    items: {
+        width: '100%', // Each item takes the full width
+        marginTop: 5,
     },
     picker: {
-        height: 50,
-        width: 50,
+        height: 45,
+        width: 100,
+        color: '#000000',
+        backgroundColor: '#127ac1',
+        borderRadius:20
     },
 });

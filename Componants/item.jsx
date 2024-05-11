@@ -39,62 +39,34 @@ export default function Item ({img , onPress , name , price , type , Class , to}
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'space-between',
+        width: '100%', // Set container width to 100% of the page
         backgroundColor: '#ecf0f1',
         padding: 8,
-        flexDirection:'row',
-        alignItems:'center'
+        borderRadius: 5,
+        marginBottom: 10,
     },
-    button:{
-        borderRadius:5,
-        width : 'auto',
-        height:'auto',
-        flexDirection:'row',
-        borderBlockColor:'#fff'
+    button: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#d3dfe8', // Use a color from your palette
+        padding: 10,
+        width: '100%', // Set button width to 100% of the container
     },
-    text:{
-        fontSize : 18,
-       
-        
+    text: {
+        fontSize: 18,
+        marginLeft: 10,
+        color: '#000000', // Use a color from your palette
     },
-    textcontainer:{
-        flex :1,
-        padding :10,
+    textcontainer: {
+        flex: 1,
+        padding: 10,
     },
-    image:{
-        width: 100, 
-        height: 100, 
+    image: {
+        width: 100,
+        height: 100,
         resizeMode: 'cover',
         borderRadius: 5,
     },
-    imagContainer:{
-        padding: 10,
-    }
-
-})
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flexDirection: 'row',
-//         alignItems: 'center',
-//         borderColor: '#ccc',
-//         borderWidth: 1,
-//         borderRadius: 5,
-//         marginBottom: 10,
-//     },
-//     image: {
-//         width: 100, // Adjust width as needed
-//         height: 100, // Adjust height as needed
-//         resizeMode: 'cover',
-//         borderRadius: 5,
-//     },
-//     textContainer: {
-//         flex: 1,
-//         justifyContent: 'center',
-//         paddingHorizontal: 10,
-//     },
-//     text: {
-//         fontSize: 18,
-//     },
-// });
+});
