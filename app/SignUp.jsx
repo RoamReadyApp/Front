@@ -6,21 +6,7 @@ import {Link} from 'expo-router';
 export default function Register() {
     const [Email , setEmail] = useState('');
     const [Password , setPassword] = useState('');
-   //w const auth = getAuth(app);
-
-    // const handelSignUp = () =>{
-    //     createUserWithEmailAndPassword(auth, Email, Password)
-    //     .then((userCredential) => {
-    //         console.log("done!") ;
-    //         const user = userCredential.user;
-           
-    //     })
-    //     .catch((error) => {
-    //         const errorCode = error.code;
-    //         const errorMessage = error.message;
-    //         console.log(errorMessage) ;
-    //     });
-    // }
+   
     return(
         <View style ={styles.container}>
             <Text style = {styles.header}>SignUp</Text>
