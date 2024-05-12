@@ -3,7 +3,7 @@
 import React , {useEffect , useState} from "react";
 import{ View ,TextInput ,Text , StyleSheet, FlatList , ScrollView , Dimensions} from 'react-native';
 import Countries from "../Componants/Countries";
-import {  useRouter  } from "expo-router";
+import {  router  } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Search from "@/Componants/Search";
 
@@ -26,7 +26,7 @@ export default function Country(){
     
     //const country = Data.find((item) => item.id === id);
 
-    const router = useRouter();
+    //const router = useRouter();
     //Iam still working on it
     //const ref = JSON.parse(route) ;
 
@@ -54,7 +54,7 @@ export default function Country(){
             <Countries
                 img={item.img}
                 name ={item.name}
-                onPress={()=> router.push('/Choose')}
+                onPress={()=> router.push('/(tabs)/Payment')}
             />
         </View>
     );
@@ -112,7 +112,7 @@ export default function Country(){
     );
 }
 
-
+//Style Nagham
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
@@ -157,4 +157,24 @@ const styles = StyleSheet.create({
         shadowRadius: 1,
         elevation: 2,
     },
+    searchContainer: {
+        flexDirection: 'row',
+        margin: 4,
+        padding: 2,
+        //backgroundColor: '#127ac1',
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        marginTop: 10,
+        width: '90%',
+    },
+    input: {
+        width: '90%',
+        height: 30,
+        color: '#127ac1',
+        borderRadius : 20,
+        borderWidth : 0.25,
+    },
+
 });
