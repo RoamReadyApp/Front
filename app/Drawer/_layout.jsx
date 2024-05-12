@@ -1,88 +1,70 @@
-// This layout for the files in app folder
+import React from "react";
+import {Drawer} from 'expo-router/drawer'
+import { DrawerContentScrollView , DrawerItem} from '@react-navigation/drawer'
+import {Feather} from '@expo/vector-icons';
+import { Stack, router } from "expo-router";
+import {logout} from "../../firebase/auth"
 
-import {View ,Text , StyleSheet, Pressable, Button} from 'react-native'
-import React from 'react'
-import { Stack, useRouter } from 'expo-router'
-import {MaterialIcons} from '@expo/vector-icons';
+const CutomDrawerContent = (props) => {
+    return(
 
-//import Login from './Login';
+    <DrawerContentScrollView {...props} >
 
-export default function _layout() {
-    const router = useRouter();
-    const icon = require('./../assets/Logo/Favicon.png');
-    const handleLogout = () => {
-        
+       <DrawerItem  
+       icon={({color , size}) => (
+       <Feather name="user" size={24} color={'black'} />
+       )}
+       label={"Profile"}
+       onPress={() => {
+        router.push('/Drawer/Home');
+       }}
+       />
+       <DrawerItem  
+       icon={({color , size}) => (
+       <Feather name="home" size={24} color={'black'} />
+       )}
+       label={"HOME"}
+       onPress={() => {
+        router.push('/Drawer/Home');
+       }}
+       />
+         <DrawerItem  
+       icon={({color , size}) => (
+       <Feather name="package" size={24} color={'black'} />
+       )}
+       label={"Countries"}
+       onPress={() => {
+        router.push('/Drawer/Country');
+       }}
+       />
+       <DrawerItem  
+       icon={({color , size}) => (
+       <Feather name="log-in" size={24} color={'black'} />
+       )}
+       label={"Log In"}
+       onPress={() => {
         router.push('/Login');
-    };
-    const color = '#127ac1';
-    const size = 30;
+       }}
+       />
+        <DrawerItem  
+       icon={({color , size}) => (
+       <Feather name="log-out" size={24} color={'black'} />
+       )}
+       label={"Log Out"}
+       onPress={async () => {
+        await logout();
+        router.navigate("/app/Drawer/(tabs)/login");
+       }}
+       />
+
+    
+    </DrawerContentScrollView>
+    );
+};
+
+export default function Layout(){
 
     return(
-        <Stack
-            screenOptions={{
-                headerStyle: {
-                    backgroundColor:'#127ac1',
-                },
-                headerTintColor:'white'
-            }}
-        >
-            <Stack.Screen name='index' options={{
-                title : 'Home',
-                
-                headerRight: () => (
-                    <Button title="Logout" onPress={handleLogout} color="#ed3926" />
-                )
-            }}/>
-            <Stack.Screen
-                name='(tabs)'
-                options={{headerShown : false}}
-            />
-            <Stack.Screen name='SignUp' options={{
-                title : 'Register',
-                headerLeft: () => (
-                    <Pressable onPress={() => router.back()} style={styles.back}>
-                        <MaterialIcons name="arrow-back" size={size} color='#fff' />
-                    </Pressable>
-                ),
-            }}/>
-            <Stack.Screen name='Login' options={{
-                title : 'Login',
-                presentation :'modal',
-                headerLeft: () => (
-                    <Pressable onPress={() => router.back()} style={styles.back}>
-                        <MaterialIcons name="arrow-back" size={size} color='#fff' />
-                    </Pressable>
-                ),
-            }}/>
-             <Stack.Screen name='Country' options={{
-                title : 'Country',
-                headerLeft: () => (
-                    <Pressable onPress={() => router.back()} style={styles.back}>
-                        <MaterialIcons name="arrow-back" size={size} color='#fff' />
-                    </Pressable>
-                ),
-            }}/>
-            <Stack.Screen name='Choose' options={{
-                title : 'Country',
-                headerLeft: () => (
-                    <Pressable onPress={() => router.back()} style={styles.back}>
-                        <MaterialIcons name="arrow-back" size={size} color='#fff' />
-                    </Pressable>
-                ),
-            }}/>
-            <Stack.Screen name='[missing]' options={{
-                title : '404'
-            }}/>
-            
-        </Stack>
-    );
+        <Drawer drawerContent={(props) => <CutomDrawerContent {...props} />} />
+    )
 }
-const styles = StyleSheet.create({
-    logText:{
-        fontSize:5,
-        color :'white'
-    },
-    back:{
-        margin :10
-    }
-})
