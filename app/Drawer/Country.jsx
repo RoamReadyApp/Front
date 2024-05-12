@@ -112,7 +112,7 @@ export default function Country(){
     );
 }
 
-//Style Nagham
+//Style Nagham....................................
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
