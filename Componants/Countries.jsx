@@ -1,6 +1,6 @@
 import React from "react";
 import{safeAreaView , View , Pressable ,Text , StyleSheet ,Image , Dimensions} from 'react-native';
-import { Link } from "expo-router";
+
 
 const windowWidth = Dimensions.get('window').width;
 // Calculate the image width based on a percentage of the window width

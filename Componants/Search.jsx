@@ -6,49 +6,8 @@ import MyButton from "./MyButton";
 
 export default function Search({onPress}){
     const [query , setQuery] = useState('');
-    // const [orgList , setOrgList] = useState([]);
-    // const [disList , setDisList] = useState([]);
-     const [showInput, setShowInput] = useState(false);
+   
 
-    // useEffect(() => {
-    //     fetch(Data).then(response => response.json())
-    //         .then(data => {AsyncStorage.setItem("orgList" , JSON.stringify(data))
-    //             .then(() => {
-    //                 // setDisList(data);
-    //                 setOrgList(data);
-    //             }).catch(error => console.error('Error saving data:', error));
-    // }).catch(error => console.error('Error saving data:', error));
-    // },[]);
-    
-    // useEffect(() => {
-    //     async function fetchFilteredData() {
-    //       try {
-    //         // Retrieve saved search query from AsyncStorage
-    //         const savedSearchQuery = await AsyncStorage.getItem('query');
-    //         if (savedSearchQuery) {
-    //           setQuery(savedSearchQuery);
-    //         }
-    //       } catch (error) {
-    //         console.error('Error retrieving search query from AsyncStorage:', error);
-    //       }
-    //     }
-    
-    //     fetchFilteredData();
-    //   }, []);
-    
-
-    // useEffect(() => {
-    //     if (query.trim() === "") {
-    //         setDisList(orgList);
-    //         setShowInput(false);
-    //     } else {
-    //         const filteredList = orgList.filter(
-    //             (item) => item.name.toLowerCase().includes(query.toLowerCase())
-    //         );
-    //         setDisList(filteredList);
-    //         AsyncStorage.setItem('query', query);
-    //     }
-    // },[query , orgList]);
 
     return(
         <View style={styles.searchContainer}>
