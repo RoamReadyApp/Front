@@ -2,7 +2,7 @@
 
 import React , {useEffect , useState} from "react";
 import{ View ,TextInput ,Text , StyleSheet, FlatList , ScrollView , Dimensions} from 'react-native';
-import Countries from "../Componants/Countries";
+import Countries from "../../Componants/Countries";
 import {  router  } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Search from "@/Componants/Search";
