@@ -65,7 +65,7 @@ export default function Page() {
                 name={item.name}
                 price={item.Price}
                 type={item.type}
-                onPress={{}}
+                onPress={()=> route.push('/payment')}
             />
         </View>
     );

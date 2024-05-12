@@ -52,7 +52,7 @@ export default function Page() {
                 Class={item.Class}
                 to={item.to}
                 //Still working on it
-                onPress={{}}
+                onPress={()=> route.push('/payment')}
             />
         </View>
     );
