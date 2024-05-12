@@ -1,34 +1,27 @@
 //The list of countries Still working on it don't use it yet
 
 import React , {useEffect , useState} from "react";
-import{ View ,TextInput ,Text , StyleSheet, FlatList , ScrollView , Dimensions} from 'react-native';
+import{ View ,TextInput ,Text , StyleSheet, FlatList , ScrollView} from 'react-native';
 import Countries from "../../Componants/Countries";
-import {  router  } from "expo-router";
+import {  useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Search from "@/Componants/Search";
 
-const windowWidth = Dimensions.get('window').width;
-// Calculate the image width based on a percentage of the window width
-const imageWidth = windowWidth * 0.2;
-
 export default function Country(){
     //the images
-    const palstine = require('../assets/images/Paliestine.jpg');
-    const a = require('../assets/images/2.jpg');
-    const b = require('../assets/images/7.jpg');
-    const c = require('../assets/images/4.jpg');
-    const d = require('../assets/images/5.jpg');
+    const palstine = require('../../assets/images/Paliestine.jpg');
+    const a = require('../../assets/images/2.jpg');
+    const b = require('../../assets/images/7.jpg');
+    const c = require('../../assets/images/4.jpg');
+    const d = require('../../assets/images/5.jpg');
 
     //Search var
     const [query , setQuery] = useState('');
     const [disList , setDisList] = useState([]);
     const [showInput, setShowInput] = useState(false);
     
-    //const country = Data.find((item) => item.id === id);
-
-    //const router = useRouter();
-    //Iam still working on it
-    //const ref = JSON.parse(route) ;
+    const router = useRouter();
+   
 
     //list of data
     const Data = [
@@ -39,7 +32,7 @@ export default function Country(){
         { id: '5', name: 'Turky', img: d  , Price : '10000$'},
         { id: '6', name: 'Paliestina', img: palstine  , Price : '10000$'},
         { id: '7', name: 'Egypt', img: a  , Price : '10000$'},
-        { id: '8', name: 'New Yourk', img: b  , Price : '10000$'},
+        { id: '8', name: 'NewYourk', img: b  , Price : '10000$'},
         { id: '9', name: 'Italy', img: c  , Price : '10000$'},
         { id: '10', name: 'Turky', img: d  , Price : '10000$'},
         { id: '11', name: 'Paliestina', img: palstine  , Price : '10000$'},
@@ -54,12 +47,17 @@ export default function Country(){
             <Countries
                 img={item.img}
                 name ={item.name}
-                onPress={()=> router.push('/(tabs)/Payment')}
+                onPress={()=> router.push('/listing/' + item.id)}
             />
         </View>
     );
 
-    
+    //Routes
+
+    // const handleRoutes =(id) =>(
+    //     router.push('/listing/' + id)
+    // );
+
     
    
     //Search handling//////////////////////////////////////////////////////////////////////
@@ -67,7 +65,21 @@ export default function Country(){
         setDisList(Data);
     },[]);
     
-   
+    useEffect(() => {
+        async function fetchFilteredData() {
+          try {
+            // Retrieve saved search query from AsyncStorage
+            const savedSearchQuery = await AsyncStorage.getItem('query');
+            if (savedSearchQuery) {
+              setQuery(savedSearchQuery);
+            }
+          } catch (error) {
+            console.error('Error retrieving search query from AsyncStorage:', error);
+          }
+        }
+    
+        fetchFilteredData();
+      }, []);
     
 
     useEffect(() => {
@@ -112,69 +124,74 @@ export default function Country(){
     );
 }
 
-//Style Nagham....................................
+
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        borderColor: '#ccc',
-        borderWidth: 0,
-        marginBottom: 10,
-        flexWrap: 'wrap', // Allow items to wrap to the next row
-        justifyContent: 'space-between', // Add space between items
-    },
-    imageContainer: {
-        width: imageWidth *1.25, // Adjust width to show 3 items in a row
-        aspectRatio: 1, // Maintain aspect ratio
-        marginBottom: 10, // Adjust spacing between rows
-    },
-    image: {
-        width: '100%', // Adjust width as needed
-        aspectRatio: 1, // Maintain aspect ratio
-        resizeMode: 'cover', // or 'contain' depending on your preference
-        borderRadius: 5,
-    },
-    textContainer: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 5, // Adjust spacing between image and text
-    },
-    text: {
-        fontSize: 20,
-        fontStyle: 'italic',
-        marginBottom: 5,
+        backgroundColor: '#fff',
+        flexDirection: 'column',
     },
     button: {
-        width: '33.33%',
-        aspectRatio: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+        width: '30%', 
+        height:300,
+        marginLeft: 30,
+        marginTop: 20,
+        justifyContent: "flex-end",
+        alignItems:"center",
         backgroundColor: '#fff',
+        paddingVertical: 30,
+        paddingHorizontal: 20,
         borderRadius: 20,
-        shadowColor: '#000',
-        shadowOffset: { height: 1, width: 1 },
-        shadowOpacity: 0.5,
-        shadowRadius: 1,
-        elevation: 2,
+        shadowColor: '#fff', // Optional shadow for iOS
+        shadowOffset: { height: 1, width: 1 }, // Optional shadow for iOS
+        shadowOpacity: 1, // Optional shadow for iOS
+        shadowRadius: 1, // Optional shadow for iOS
+        elevation: 2 // Optional elevation for Android
+      },
+    text: {
+        color: 'black',
+        fontSize: 18,
+        textAlign: 'center'
     },
-    searchContainer: {
-        flexDirection: 'row',
-        margin: 4,
-        padding: 2,
-        //backgroundColor: '#127ac1',
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: 10,
-        marginTop: 10,
-        width: '90%',
+    header: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
     },
-    input: {
-        width: '90%',
-        height: 30,
-        color: '#127ac1',
-        borderRadius : 20,
-        borderWidth : 0.25,
+    list: {
+        width: '100%',
+        flexDirection:'row',
+        marginLeft:5,
+        marginRight:5,
+        padding:5,
+        //alignContent :'center'
+        
     },
-
+    listContaier:{
+        flex :1,
+        alignItems :'center',
+    },
+    items:{
+        flex :1,
+        flexDirection:'row',
+        width :'30%',
+    },
+    searchContainer:{
+        marginLeft:1000,
+        flexDirection:'row',
+        margin:4,
+        padding:2,
+    },
+    input:{
+        width :'55%',
+        height :30,
+        borderWidth:1,
+        borderColor : '#7392b7',
+        borderRadius :6 ,
+        padding :10,
+        margin :8,
+        //borderBlockColor :'#c5d5ea' 
+    },
 });
